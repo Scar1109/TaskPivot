@@ -3,4 +3,6 @@
     <string name="welcome_to_">Welcome to TaskPivot!</string>
     <string name="welcome_to_task">Start your journey towards enhanced productivity with TaskPivot! Our intuitive task management app helps you stay organized and focused.</string>
     <string name="skip_txt">Skip</string>
+    <string name="ob_02_topic">Effortless Management</string>
+    <string name="ob_02_content">Say goodbye to overwhelming to-do lists and hello to effortless task management! With TaskPivot, you can easily add, prioritize, and track your tasks with just a few taps.</string>
 </resources>
