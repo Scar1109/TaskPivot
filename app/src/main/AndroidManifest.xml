@@ -12,8 +12,16 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TaskPivot"
-        >
+        android:theme="@style/Theme.TaskPivot">
+        <activity
+            android:name=".modules.HomeScreen"
+            android:exported="false" />
+        <activity
+            android:name=".modules.OnboardingScreen02"
+            android:exported="false" />
+        <activity
+            android:name=".modules.OnboardingScreen01"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

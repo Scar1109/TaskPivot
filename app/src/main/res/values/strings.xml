@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">TaskPivot</string>
+    <string name="welcome_to_">Welcome to TaskPivot!</string>
+    <string name="welcome_to_task">Start your journey towards enhanced productivity with TaskPivot! Our intuitive task management app helps you stay organized and focused.</string>
+    <string name="skip_txt">Skip</string>
 </resources>
