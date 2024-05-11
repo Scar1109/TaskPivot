@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="primary_color">#FFFFFF</color>
+    <color name="secondary_color">#0866ff</color>
+    <color name="blue_A700">#0866ff</color>
+    <color name="gray_400">#b9b9b9</color>
+    <color name="input_hint_color">#414141</color>
+    <color name="card_bg">#EAEAEA</color>
+    <color name="secondory_btn_color">#EEEEEE</color>
 </resources>
