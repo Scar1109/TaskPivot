@@ -22,7 +22,7 @@ class HomeScreen : AppCompatActivity() {
         binding = ActivityHomeScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        Bottom Navigation bar
+        //Bottom Navigation bar
         binding.bottomNavigation.selectedItemId = R.id.page_1
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
@@ -45,8 +45,7 @@ class HomeScreen : AppCompatActivity() {
                 else -> false
             } }
 
-//        Greeting message and image
-
+        //Greeting message and image
         val currentTime = Calendar.getInstance()
         val currentHour = currentTime.get(Calendar.HOUR_OF_DAY)
 
@@ -70,6 +69,16 @@ class HomeScreen : AppCompatActivity() {
         }
 
         binding.timeImg.setImageResource(imageResId)
+
+        //empty add new btn
+        binding.emptyAddnewBtn.setOnClickListener {
+            val intent = Intent(this, AddNewScreen::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+        }
+
+
+
 
     }
 }

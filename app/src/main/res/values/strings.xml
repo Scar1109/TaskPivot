@@ -6,4 +6,9 @@
     <string name="ob_02_topic">Effortless Management</string>
     <string name="ob_02_content">Say goodbye to overwhelming to-do lists and hello to effortless task management! With TaskPivot, you can easily add, prioritize, and track your tasks with just a few taps.</string>
     <string name="greeting_morning">Good Morning</string>
+    <string name="search_txt">Search</string>
+    <string name="home_title">Recent Tasks</string>
+    <string name="recent_task_title">No Recent Tasks</string>
+    <string name="no_recent_task_content">Tap Add New button for navigate to add new task page</string>
+    <string name="add_new">Add New</string>
 </resources>
