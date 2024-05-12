@@ -4,9 +4,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.core.content.ContextCompat
 import com.example.taskpivot.R
 import com.example.taskpivot.databinding.ActivityAddNewScreenBinding
 import com.example.taskpivot.databinding.ActivityHomeScreenBinding
+import com.google.android.material.datepicker.MaterialDatePicker
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
+import java.util.TimeZone
 
 class AddNewScreen : AppCompatActivity() {
 
@@ -39,5 +45,32 @@ class AddNewScreen : AppCompatActivity() {
                 }
                 else -> false
             } }
+
+        binding.dateTxt.text = "YYYY-MM-DD"
+
+        binding.buttonDate.setOnClickListener{
+            showDatePicker()
+        }
+    }
+
+    private fun showDatePicker() {
+        val datePicker =
+            MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Select date")
+                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                .build()
+
+        datePicker.addOnPositiveButtonClickListener { selection ->
+            val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+            calendar.timeInMillis = selection
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val selectedDate = dateFormat.format(calendar.time)
+            binding.dateTxt.text = selectedDate
+            binding.dateTxt.setTextColor(ContextCompat.getColor(this, R.color.input_hint_color))
+
+        }
+
+
+            datePicker.show(supportFragmentManager, "datePicker")
     }
 }
