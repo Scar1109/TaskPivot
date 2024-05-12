@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            app:srcCompat="@drawable/slider_01" />
+            app:srcCompat="@drawable/slider_02" />
 
         <ImageButton
             android:id="@+id/onboardingbtn01"
