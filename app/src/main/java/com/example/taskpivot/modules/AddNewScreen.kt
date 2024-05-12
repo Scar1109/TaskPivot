@@ -1,13 +1,17 @@
 package com.example.taskpivot.modules
 
+import Task
+import TaskViewModel
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.taskpivot.R
 import com.example.taskpivot.databinding.ActivityAddNewScreenBinding
-import com.example.taskpivot.databinding.ActivityHomeScreenBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -17,6 +21,11 @@ import java.util.TimeZone
 class AddNewScreen : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddNewScreenBinding
+    private var taskDescription : String = ""
+    private var taskTitle : String = ""
+    private var selectedDate : String = ""
+    private var priority : Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -51,6 +60,26 @@ class AddNewScreen : AppCompatActivity() {
         binding.buttonDate.setOnClickListener{
             showDatePicker()
         }
+
+        binding.priorityBtn.setOnClickListener {
+            priority = !priority
+            if(priority){
+                binding.priorityBtn.setImageResource(R.drawable.liked_star)
+            }else{
+                binding.priorityBtn.setImageResource(R.drawable.unliked_star)
+            }
+        }
+
+
+        binding.saveTaskBtn.setOnClickListener {
+
+            val titleEditText: EditText = binding.titleInput.editText!!
+            taskDescription = binding.taskDesciption.text.toString()
+            taskTitle = titleEditText.text.toString()
+            selectedDate = binding.dateTxt.text.toString()
+            saveTask()
+        }
+
     }
 
     private fun showDatePicker() {
@@ -72,5 +101,26 @@ class AddNewScreen : AppCompatActivity() {
 
 
             datePicker.show(supportFragmentManager, "datePicker")
+    }
+
+    private fun saveTask() {
+
+        val task = Task(
+            taskTitle = taskTitle,
+            taskDescription = taskDescription,
+            taskPriority = priority,
+            taskDate = selectedDate
+        )
+
+        val taskViewModel = ViewModelProvider(this).get(TaskViewModel::class.java)
+
+        val result = taskViewModel.addTask(task)
+        if (result != -1L) {
+            Toast.makeText(this, "Task Created Successfully", Toast.LENGTH_SHORT).show()
+            // Task saved successfully
+            finish()
+        } else {
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
+        }
     }
 }

@@ -28,6 +28,7 @@
             app:srcCompat="@drawable/save_img" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/title_input"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:hint="@string/title_placeholder"
@@ -70,9 +71,9 @@
                     tools:text="YYYY-MM-DD" />
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="15dp"
                     app:srcCompat="@drawable/calender" />
 
             </LinearLayout>
@@ -80,6 +81,7 @@
         </RelativeLayout>
 
         <EditText
+            android:id="@+id/task_desciption"
             android:layout_width="350dp"
             android:layout_height="85dp"
             android:background="@drawable/input_filed_border"
@@ -92,7 +94,7 @@
             android:paddingRight="10dp" />
 
         <Button
-            android:id="@+id/save_task"
+            android:id="@+id/save_task_btn"
             android:layout_width="350dp"
             android:layout_height="55dp"
             android:layout_marginTop="60dp"
@@ -102,7 +104,18 @@
             android:text="@string/save_task_txt"
             android:textColor="@color/primary_color"
             android:textSize="20sp" />
+
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/priority_btn"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="430dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/unliked_star" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
