@@ -1,9 +1,11 @@
 package com.example.taskpivot.modules
 
+import Task
 import TaskViewModel
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,11 +36,7 @@ class HomeScreen : AppCompatActivity() {
         // Retrieve tasks
         val tasks = taskViewModel.getAllTasks()
 
-        // Initialize RecyclerView
-        recyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        taskAdapter = TaskAdapter(tasks)
-        recyclerView.adapter = taskAdapter
+        updateUI(tasks)
 
         //Bottom Navigation bar
         binding.bottomNavigation.selectedItemId = R.id.page_1
@@ -95,8 +93,22 @@ class HomeScreen : AppCompatActivity() {
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         }
 
-
-
-
     }
+
+    private fun updateUI(tasks: List<Task>) {
+        if (tasks.isEmpty()) {
+            binding.emptyView.visibility = View.VISIBLE
+            binding.recyclerView.visibility = View.GONE
+        } else {
+            binding.emptyView.visibility = View.GONE
+            binding.recyclerView.visibility = View.VISIBLE
+
+            // Initialize RecyclerView
+            recyclerView = binding.recyclerView
+            recyclerView.layoutManager = LinearLayoutManager(this)
+            taskAdapter = TaskAdapter(tasks)
+            recyclerView.adapter = taskAdapter
+        }
+    }
+
 }
