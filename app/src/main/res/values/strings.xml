@@ -15,4 +15,7 @@
     <string name="description_hint">Task Description</string>
     <string name="date_placeholder">Select Date</string>
     <string name="save_task_txt">Save Task</string>
+    <string name="sample_title">Task 01</string>
+    <string name="sample_description">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo con</string>
+    <string name="save_card_date">Date : 23/12/2024</string>
 </resources>

@@ -1,12 +1,15 @@
 package com.example.taskpivot.modules
 
+import TaskViewModel
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.taskpivot.R
+import com.example.taskpivot.adapter.TaskAdapter
 import com.example.taskpivot.databinding.ActivityHomeScreenBinding
-import com.example.taskpivot.databinding.ActivityOnboardingScreen01Binding
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -14,6 +17,10 @@ import java.util.Locale
 class HomeScreen : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeScreenBinding
+    private lateinit var taskViewModel: TaskViewModel
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var taskAdapter: TaskAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_screen)
@@ -21,6 +28,17 @@ class HomeScreen : AppCompatActivity() {
 
         binding = ActivityHomeScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        taskViewModel = TaskViewModel(application)
+
+        // Retrieve tasks
+        val tasks = taskViewModel.getAllTasks()
+
+        // Initialize RecyclerView
+        recyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        taskAdapter = TaskAdapter(tasks)
+        recyclerView.adapter = taskAdapter
 
         //Bottom Navigation bar
         binding.bottomNavigation.selectedItemId = R.id.page_1

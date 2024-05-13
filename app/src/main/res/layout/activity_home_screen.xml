@@ -8,6 +8,17 @@
     tools:context=".modules.HomeScreen">
 
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.0" />
+
     <LinearLayout
         android:id="@+id/empty_view"
         android:layout_width="409dp"
@@ -15,6 +26,7 @@
         android:layout_marginBottom="79dp"
         android:gravity="center"
         android:orientation="vertical"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
