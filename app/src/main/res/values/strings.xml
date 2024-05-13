@@ -22,4 +22,5 @@
     <string name="remove_itm_title">Remove item?</string>
     <string name="remove_itm_description">Are you sure want to remove this item?</string>
     <string name="cancel_btn_text">Cancel</string>
+    <string name="priority_title">Priority Tasks</string>
 </resources>
