@@ -12,4 +12,8 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
     fun getAllTasks(): List<Task> {
         return repository.getAllTasks()
     }
+
+    fun deleteTask(taskId: Int): Int {
+        return repository.deleteTask(taskId)
+    }
 }

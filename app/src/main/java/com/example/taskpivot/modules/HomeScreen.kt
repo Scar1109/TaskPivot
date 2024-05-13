@@ -119,8 +119,7 @@ class HomeScreen : AppCompatActivity(), TaskAdapter.OnDeleteClickListener {
     }
 
     override fun onDeleteClick(taskId: Int) {
-        val conformDeleteModel = DeleteConformationModel()
-
+        val conformDeleteModel = DeleteConformationModel.newInstance(taskId)
         conformDeleteModel.show(supportFragmentManager, DeleteConformationModel.TAG)
     }
 }

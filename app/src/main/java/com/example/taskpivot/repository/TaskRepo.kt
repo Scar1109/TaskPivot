@@ -38,4 +38,9 @@ class TaskRepository(context: Context) {
         return tasks
     }
 
+    fun deleteTask(taskId: Int): Int {
+        val db = dbHelper.writableDatabase
+        return db.delete(TaskDBHelper.TABLE_TASKS, "${TaskDBHelper.KEY_ID}=?", arrayOf(taskId.toString()))
+    }
+
 }
