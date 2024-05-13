@@ -9,11 +9,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.taskpivot.R
 
-class TaskAdapter(private val tasks: List<Task>, private val listener: OnDeleteClickListener) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter(private var tasks: List<Task>, private val listener: OnDeleteClickListener) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     // Define an interface for click listener
     interface OnDeleteClickListener {
         fun onDeleteClick(taskId: Int)
+    }
+
+    fun updateTasks(newTasks: List<Task>) {
+        tasks = newTasks
+        notifyDataSetChanged()
     }
 
 

@@ -122,4 +122,14 @@ class HomeScreen : AppCompatActivity(), TaskAdapter.OnDeleteClickListener {
         val conformDeleteModel = DeleteConformationModel.newInstance(taskId)
         conformDeleteModel.show(supportFragmentManager, DeleteConformationModel.TAG)
     }
+
+    // Function to handle task deletion and refresh data
+    fun deleteTaskAndRefresh(taskId: Int) {
+        // Delete task from ViewModel or Repository
+        taskViewModel.deleteTask(taskId)
+
+        // Get updated tasks from ViewModel or Repository
+        val updatedTasks = taskViewModel.getAllTasks()
+        updateUI(updatedTasks)
+    }
 }
