@@ -96,18 +96,20 @@ class HomeScreen : AppCompatActivity() {
     }
 
     private fun updateUI(tasks: List<Task>) {
+
+        // Initialize RecyclerView
+        recyclerView = binding.recyclerView
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        taskAdapter = TaskAdapter(tasks)
+        recyclerView.adapter = taskAdapter
+
         if (tasks.isEmpty()) {
             binding.emptyView.visibility = View.VISIBLE
             binding.recyclerView.visibility = View.GONE
         } else {
             binding.emptyView.visibility = View.GONE
             binding.recyclerView.visibility = View.VISIBLE
-
-            // Initialize RecyclerView
-            recyclerView = binding.recyclerView
-            recyclerView.layoutManager = LinearLayoutManager(this)
-            taskAdapter = TaskAdapter(tasks)
-            recyclerView.adapter = taskAdapter
         }
     }
 
