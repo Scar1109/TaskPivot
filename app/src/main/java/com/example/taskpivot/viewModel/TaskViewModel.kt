@@ -16,4 +16,8 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
     fun deleteTask(taskId: Int): Int {
         return repository.deleteTask(taskId)
     }
+
+    fun updateTaskPriority(taskId: Int, newPriority: Boolean): Int {
+        return repository.updateTaskPriority(taskId, newPriority)
+    }
 }

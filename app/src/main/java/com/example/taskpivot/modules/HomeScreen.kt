@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class HomeScreen : AppCompatActivity(), TaskAdapter.OnDeleteClickListener {
+class HomeScreen : AppCompatActivity(), TaskAdapter.OnDeleteClickListener, TaskAdapter.OnPriorityClickListener {
 
     private lateinit var binding: ActivityHomeScreenBinding
     private lateinit var taskViewModel: TaskViewModel
@@ -106,7 +106,7 @@ class HomeScreen : AppCompatActivity(), TaskAdapter.OnDeleteClickListener {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Pass the activity as a listener to the adapter
-        taskAdapter = TaskAdapter(tasks, this)
+        taskAdapter = TaskAdapter(tasks, this, this)
         recyclerView.adapter = taskAdapter
 
         if (tasks.isEmpty()) {
@@ -131,5 +131,19 @@ class HomeScreen : AppCompatActivity(), TaskAdapter.OnDeleteClickListener {
         // Get updated tasks from ViewModel or Repository
         val updatedTasks = taskViewModel.getAllTasks()
         updateUI(updatedTasks)
+    }
+
+    override fun onPriorityClick(taskId: Int, currentPriority: Boolean) {
+        // Update priority in the database
+        val updatedRows = taskViewModel.updateTaskPriority(taskId, currentPriority)
+        if (updatedRows > 0) {
+            // Database update successful
+            // Refresh UI
+            val updatedTasks = taskViewModel.getAllTasks()
+            taskAdapter.updateTasks(updatedTasks)
+        } else {
+            // Database update failed
+            Toast.makeText(this, "Failed to update priority", Toast.LENGTH_SHORT).show()
+        }
     }
 }

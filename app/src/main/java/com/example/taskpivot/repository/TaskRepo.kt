@@ -43,4 +43,17 @@ class TaskRepository(context: Context) {
         return db.delete(TaskDBHelper.TABLE_TASKS, "${TaskDBHelper.KEY_ID}=?", arrayOf(taskId.toString()))
     }
 
+    fun updateTaskPriority(taskId: Int, newPriority: Boolean): Int {
+        val db = dbHelper.writableDatabase
+        val values = ContentValues().apply {
+            put(TaskDBHelper.KEY_PRIORITY, if (newPriority) 1 else 0)
+        }
+        return db.update(
+            TaskDBHelper.TABLE_TASKS,
+            values,
+            "${TaskDBHelper.KEY_ID}=?",
+            arrayOf(taskId.toString())
+        )
+    }
+
 }

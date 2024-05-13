@@ -9,11 +9,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.taskpivot.R
 
-class TaskAdapter(private var tasks: List<Task>, private val listener: OnDeleteClickListener) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter(private var tasks: List<Task>, private val listener: OnDeleteClickListener, private val priorityClickListener: OnPriorityClickListener) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     // Define an interface for click listener
     interface OnDeleteClickListener {
         fun onDeleteClick(taskId: Int)
+    }
+
+    interface OnPriorityClickListener {
+        fun onPriorityClick(taskId: Int, currentPriority: Boolean)
     }
 
     fun updateTasks(newTasks: List<Task>) {
@@ -27,6 +31,8 @@ class TaskAdapter(private var tasks: List<Task>, private val listener: OnDeleteC
         val descriptionTextView: TextView = itemView.findViewById(R.id.task_description)
         val dateTextView: TextView = itemView.findViewById(R.id.task_date)
         val deleteImageView: ImageView = itemView.findViewById(R.id.delete_button)
+        val priorityImageView: ImageView = itemView.findViewById(R.id.priority_btn)
+
 
         init {
             deleteImageView.setOnClickListener(this)
@@ -53,6 +59,20 @@ class TaskAdapter(private var tasks: List<Task>, private val listener: OnDeleteC
         holder.titleTextView.text = currentTask.taskTitle
         holder.descriptionTextView.text = currentTask.taskDescription
         holder.dateTextView.text = currentTask.taskDate
+
+        // Set OnClickListener for the priority image
+        holder.priorityImageView.setOnClickListener {
+            val task = tasks[position]
+            val newPriority = !task.taskPriority // Toggle priority
+            priorityClickListener.onPriorityClick(task.id, newPriority)
+        }
+
+
+        if (currentTask.taskPriority) {
+            holder.priorityImageView.setImageResource(R.drawable.liked_star)
+        } else {
+            holder.priorityImageView.setImageResource(R.drawable.unliked_star)
+        }
     }
 
     override fun getItemCount() = tasks.size
