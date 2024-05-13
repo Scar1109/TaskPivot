@@ -117,7 +117,9 @@ class AddNewScreen : AppCompatActivity() {
         val result = taskViewModel.addTask(task)
         if (result != -1L) {
             Toast.makeText(this, "Task Created Successfully", Toast.LENGTH_SHORT).show()
-            // Task saved successfully
+            val intent = Intent(this, HomeScreen::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             finish()
         } else {
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()

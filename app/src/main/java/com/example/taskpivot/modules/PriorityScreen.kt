@@ -23,7 +23,7 @@ class PriorityScreen : AppCompatActivity() {
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_1 -> {
-                    val intent = Intent(this, PriorityScreen::class.java)
+                    val intent = Intent(this, HomeScreen::class.java)
                     startActivity(intent)
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                     true
