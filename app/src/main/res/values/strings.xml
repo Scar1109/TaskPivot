@@ -11,7 +11,7 @@
     <string name="recent_task_title">No Recent Tasks</string>
     <string name="no_recent_task_content">Tap Add New button for navigate to add new task page</string>
     <string name="add_new">Add New</string>
-    <string name="title_placeholder" >Title of Task</string>
+    <string name="title_placeholder">Title of Task</string>
     <string name="description_hint">Task Description</string>
     <string name="date_placeholder">Select Date</string>
     <string name="save_task_txt">Save Task</string>
@@ -23,4 +23,6 @@
     <string name="remove_itm_description">Are you sure want to remove this item?</string>
     <string name="cancel_btn_text">Cancel</string>
     <string name="priority_title">Priority Tasks</string>
+    <string name="due_date_txt">Due Date</string>
+    <string name="description_txt">Description</string>
 </resources>

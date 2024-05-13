@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TaskPivot">
         <activity
+            android:name=".modules.TaskViewScreen"
+            android:exported="false" />
+        <activity
             android:name=".modules.PriorityScreen"
             android:exported="false" />
         <activity

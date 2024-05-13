@@ -30,7 +30,6 @@ class HomeScreen : AppCompatActivity(), TaskAdapter.OnDeleteClickListener, TaskA
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home_screen)
         enableEdgeToEdge()
 
         binding = ActivityHomeScreenBinding.inflate(layoutInflater)
