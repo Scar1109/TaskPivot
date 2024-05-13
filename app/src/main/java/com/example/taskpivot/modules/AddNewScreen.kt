@@ -105,14 +105,17 @@ class AddNewScreen : AppCompatActivity() {
 
     private fun saveTask() {
 
+        val taskViewModel = ViewModelProvider(this).get(TaskViewModel::class.java)
+
+        val taskcount = taskViewModel.getAllTasks().size + 1
+
         val task = Task(
+            id = taskcount,
             taskTitle = taskTitle,
             taskDescription = taskDescription,
             taskPriority = priority,
             taskDate = selectedDate
         )
-
-        val taskViewModel = ViewModelProvider(this).get(TaskViewModel::class.java)
 
         val result = taskViewModel.addTask(task)
         if (result != -1L) {

@@ -6,17 +6,19 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.taskpivot.R
 import com.example.taskpivot.adapter.TaskAdapter
 import com.example.taskpivot.databinding.ActivityHomeScreenBinding
+import com.example.taskpivot.popups.DeleteConformationModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class HomeScreen : AppCompatActivity() {
+class HomeScreen : AppCompatActivity(), TaskAdapter.OnDeleteClickListener {
 
     private lateinit var binding: ActivityHomeScreenBinding
     private lateinit var taskViewModel: TaskViewModel
@@ -36,6 +38,7 @@ class HomeScreen : AppCompatActivity() {
         // Retrieve tasks
         val tasks = taskViewModel.getAllTasks()
 
+        // Pass the activity as a listener to the adapter
         updateUI(tasks)
 
         //Bottom Navigation bar
@@ -59,7 +62,8 @@ class HomeScreen : AppCompatActivity() {
                     true
                 }
                 else -> false
-            } }
+            }
+        }
 
         //Greeting message and image
         val currentTime = Calendar.getInstance()
@@ -80,7 +84,7 @@ class HomeScreen : AppCompatActivity() {
         val imageResId = when {
             currentHour in 4..9 -> R.drawable.morining_sun
             currentHour in 10..15 -> R.drawable.noon_sun
-            currentHour in 16 .. 17 -> R.drawable.evenining_sun
+            currentHour in 16..17 -> R.drawable.evenining_sun
             else -> R.drawable.night_moon
         }
 
@@ -101,7 +105,8 @@ class HomeScreen : AppCompatActivity() {
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        taskAdapter = TaskAdapter(tasks)
+        // Pass the activity as a listener to the adapter
+        taskAdapter = TaskAdapter(tasks, this)
         recyclerView.adapter = taskAdapter
 
         if (tasks.isEmpty()) {
@@ -113,4 +118,9 @@ class HomeScreen : AppCompatActivity() {
         }
     }
 
+    override fun onDeleteClick(taskId: Int) {
+        val conformDeleteModel = DeleteConformationModel()
+
+        conformDeleteModel.show(supportFragmentManager, DeleteConformationModel.TAG)
+    }
 }

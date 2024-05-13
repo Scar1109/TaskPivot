@@ -18,4 +18,8 @@
     <string name="sample_title">Task 01</string>
     <string name="sample_description">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo con</string>
     <string name="save_card_date">Date : 23/12/2024</string>
+    <string name="remove_btn_txt">Remove Item</string>
+    <string name="remove_itm_title">Remove item?</string>
+    <string name="remove_itm_description">Are you sure want to remove this item?</string>
+    <string name="cancel_btn_text">Cancel</string>
 </resources>
