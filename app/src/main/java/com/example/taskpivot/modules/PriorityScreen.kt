@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.taskpivot.R
 import com.example.taskpivot.adapter.TaskAdapter
 import com.example.taskpivot.databinding.ActivityPriorityScreenBinding
-import com.example.taskpivot.popups.DeleteConformationModel
+import com.example.taskpivot.popups.PriorityDeleteConformationModel
 
 class PriorityScreen : AppCompatActivity(), TaskAdapter.OnDeleteClickListener, TaskAdapter.OnPriorityClickListener {
 
@@ -36,6 +36,13 @@ class PriorityScreen : AppCompatActivity(), TaskAdapter.OnDeleteClickListener, T
 
         // Update UI with retrieved tasks
         updateUI(tasks)
+
+        //empty add new btn
+        binding.emptyAddnewBtn.setOnClickListener {
+            val intent = Intent(this, AddNewScreen::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+        }
 
         // Set up bottom navigation
         binding.bottomNavigation.selectedItemId = R.id.page_3
@@ -85,8 +92,8 @@ class PriorityScreen : AppCompatActivity(), TaskAdapter.OnDeleteClickListener, T
     }
 
     override fun onDeleteClick(taskId: Int) {
-        val conformDeleteModel = DeleteConformationModel.newInstance(taskId)
-        conformDeleteModel.show(supportFragmentManager, DeleteConformationModel.TAG)
+        val conformDeleteModel = PriorityDeleteConformationModel.newInstance(taskId)
+        conformDeleteModel.show(supportFragmentManager, PriorityDeleteConformationModel.TAG)
     }
 
     // Function to handle task deletion and refresh data
