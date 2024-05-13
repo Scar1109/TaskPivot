@@ -113,7 +113,11 @@ class PriorityScreen : AppCompatActivity(), TaskAdapter.OnDeleteClickListener, T
             // Database update successful
             // Refresh UI
             val updatedTasks = taskViewModel.getAllTasks()
-            taskAdapter.updateTasks(updatedTasks)
+            val priorityTasks = updatedTasks.filter { it.taskPriority }
+            taskAdapter.updateTasks(priorityTasks)
+            if(priorityTasks.isEmpty()){
+                updateUI(priorityTasks)
+            }
         } else {
             // Database update failed
             Toast.makeText(this, "Failed to update priority", Toast.LENGTH_SHORT).show()
