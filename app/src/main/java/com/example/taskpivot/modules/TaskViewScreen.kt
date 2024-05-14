@@ -11,7 +11,7 @@ import com.example.taskpivot.databinding.ActivityTaskViewScreenBinding
 import com.example.taskpivot.popups.DeleteConformationModel
 import com.example.taskpivot.popups.EditTaskModel
 
-class TaskViewScreen : AppCompatActivity() {
+class TaskViewScreen : AppCompatActivity(), EditTaskModel.EditTaskListener {
 
     private lateinit var binding: ActivityTaskViewScreenBinding
     private lateinit var taskViewModel: TaskViewModel
@@ -99,6 +99,25 @@ class TaskViewScreen : AppCompatActivity() {
                     true
                 }
                 else -> false
+            }
+        }
+    }
+
+    override fun onTaskUpdated(updated: Boolean) {
+        if (updated) {
+            val task = taskViewModel.getTaskById(taskId)
+            if (task != null) {
+                // Display task details
+                binding.taskTitle.text = task.taskTitle
+                binding.taskDate.text = task.taskDate
+                binding.taskDescription.text = task.taskDescription
+
+                // Set priority button image based on task priority
+                if (task.taskPriority) {
+                    binding.priorityBtn.setImageResource(R.drawable.liked_star)
+                } else {
+                    binding.priorityBtn.setImageResource(R.drawable.unliked_star)
+                }
             }
         }
     }

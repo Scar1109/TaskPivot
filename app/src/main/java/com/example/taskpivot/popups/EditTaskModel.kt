@@ -30,6 +30,10 @@ class EditTaskModel : BottomSheetDialogFragment() {
     private lateinit var taskViewModel: TaskViewModel
     private var taskID : Int = 0
 
+    interface EditTaskListener {
+        fun onTaskUpdated(updated: Boolean)
+    }
+
     companion object {
         const val TAG = "EditionModel"
         const val ARG_TASK_ID = "task_id"
@@ -149,9 +153,11 @@ class EditTaskModel : BottomSheetDialogFragment() {
         // Dismiss the dialog if the task is successfully updated
         if (updatedRows > 0) {
             Toast.makeText(requireContext(), "Task updated successfully", Toast.LENGTH_SHORT).show()
+            (activity as? EditTaskListener)?.onTaskUpdated(true)
             dismiss()
         } else {
             Toast.makeText(requireContext(), "Failed to update task", Toast.LENGTH_SHORT).show()
+            (activity as? EditTaskListener)?.onTaskUpdated(false)
         }
     }
 
