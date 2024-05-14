@@ -25,4 +25,6 @@
     <string name="priority_title">Priority Tasks</string>
     <string name="due_date_txt">Due Date</string>
     <string name="description_txt">Description</string>
+    <string name="title_txrt">Title</string>
+    <string name="save_chnages_txt">Save Changes</string>
 </resources>
