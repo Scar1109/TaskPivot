@@ -89,4 +89,20 @@ class TaskRepository(context: Context) {
         return task
     }
 
+    fun updateTask(task: Task): Int {
+        val db = dbHelper.writableDatabase
+        val values = ContentValues().apply {
+            put(TaskDBHelper.KEY_TITLE, task.taskTitle)
+            put(TaskDBHelper.KEY_DESCRIPTION, task.taskDescription)
+            put(TaskDBHelper.KEY_PRIORITY, if (task.taskPriority) 1 else 0)
+            put(TaskDBHelper.KEY_DATE, task.taskDate)
+        }
+        return db.update(
+            TaskDBHelper.TABLE_TASKS,
+            values,
+            "${TaskDBHelper.KEY_ID}=?",
+            arrayOf(task.id.toString())
+        )
+    }
+
 }

@@ -24,4 +24,8 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
     fun getTaskById(taskId: Int): Task? {
         return repository.getTaskById(taskId)
     }
+
+    fun updateTask(task: Task) : Int {
+        return repository.updateTask(task)
+    }
 }
