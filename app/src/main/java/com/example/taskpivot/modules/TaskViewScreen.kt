@@ -8,6 +8,8 @@ import androidx.activity.enableEdgeToEdge
 import com.example.taskpivot.R
 import com.example.taskpivot.databinding.ActivityHomeScreenBinding
 import com.example.taskpivot.databinding.ActivityTaskViewScreenBinding
+import com.example.taskpivot.popups.DeleteConformationModel
+import com.example.taskpivot.popups.EditTaskModel
 
 class TaskViewScreen : AppCompatActivity() {
 
@@ -27,11 +29,13 @@ class TaskViewScreen : AppCompatActivity() {
         binding.backBtn.setOnClickListener {
             val intent = Intent(this, HomeScreen::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         }
 
         binding.addnewBtn.setOnClickListener {
             val intent = Intent(this,AddNewScreen::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         }
 
         taskViewModel = TaskViewModel(application)
@@ -59,6 +63,16 @@ class TaskViewScreen : AppCompatActivity() {
                 binding.priorityBtn.setImageResource(R.drawable.unliked_star)
             }
             taskViewModel.updateTaskPriority(taskId,priority)
+        }
+
+        binding.deleteButton.setOnClickListener {
+            val conformDeleteModel = DeleteConformationModel.newInstance(taskId)
+            conformDeleteModel.show(supportFragmentManager, DeleteConformationModel.TAG)
+        }
+
+        binding.editBtn.setOnClickListener {
+            val editTaskModel = EditTaskModel.newInstance(taskId)
+            editTaskModel.show(supportFragmentManager, EditTaskModel.TAG)
         }
 
         //Bottom Navigation bar
