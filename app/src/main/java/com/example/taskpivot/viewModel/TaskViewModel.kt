@@ -20,4 +20,8 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
     fun updateTaskPriority(taskId: Int, newPriority: Boolean): Int {
         return repository.updateTaskPriority(taskId, newPriority)
     }
+
+    fun getTaskById(taskId: Int): Task? {
+        return repository.getTaskById(taskId)
+    }
 }

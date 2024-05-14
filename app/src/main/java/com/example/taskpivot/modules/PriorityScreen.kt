@@ -107,9 +107,7 @@ class PriorityScreen : AppCompatActivity(), TaskAdapter.OnDeleteClickListener, T
     }
 
     override fun onTaskClick(taskId: Int) {
-        // Show a Toast message with the task ID
-        Toast.makeText(this, "Task ID: $taskId", Toast.LENGTH_SHORT).show()
-        val intent = Intent(this,AddNewScreen::class.java)
+        val intent = Intent(this,TaskViewScreen::class.java)
         intent.putExtra("taskId", taskId)
         startActivity(intent)
     }

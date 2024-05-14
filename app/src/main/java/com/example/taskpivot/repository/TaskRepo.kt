@@ -56,4 +56,37 @@ class TaskRepository(context: Context) {
         )
     }
 
+    @SuppressLint("Range")
+    fun getTaskById(taskId: Int): Task? {
+        val db = dbHelper.readableDatabase
+        val cursor: Cursor = db.query(
+            TaskDBHelper.TABLE_TASKS,
+            arrayOf(
+                TaskDBHelper.KEY_ID,
+                TaskDBHelper.KEY_TITLE,
+                TaskDBHelper.KEY_DESCRIPTION,
+                TaskDBHelper.KEY_PRIORITY,
+                TaskDBHelper.KEY_DATE
+            ),
+            "${TaskDBHelper.KEY_ID}=?",
+            arrayOf(taskId.toString()),
+            null,
+            null,
+            null,
+            null
+        )
+
+        var task: Task? = null
+        if (cursor.moveToFirst()) {
+            val id = cursor.getInt(cursor.getColumnIndex(TaskDBHelper.KEY_ID))
+            val title = cursor.getString(cursor.getColumnIndex(TaskDBHelper.KEY_TITLE))
+            val description = cursor.getString(cursor.getColumnIndex(TaskDBHelper.KEY_DESCRIPTION))
+            val priority = cursor.getInt(cursor.getColumnIndex(TaskDBHelper.KEY_PRIORITY)) == 1
+            val date = cursor.getString(cursor.getColumnIndex(TaskDBHelper.KEY_DATE))
+            task = Task(id, title, description, priority, date)
+        }
+        cursor.close()
+        return task
+    }
+
 }
