@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class HomeScreen : AppCompatActivity(), TaskAdapter.OnDeleteClickListener, TaskAdapter.OnPriorityClickListener {
+class HomeScreen : AppCompatActivity(), TaskAdapter.OnDeleteClickListener, TaskAdapter.OnPriorityClickListener, TaskAdapter.OnTaskClickListener {
 
     private lateinit var binding: ActivityHomeScreenBinding
     private lateinit var taskViewModel: TaskViewModel
@@ -119,7 +119,7 @@ class HomeScreen : AppCompatActivity(), TaskAdapter.OnDeleteClickListener, TaskA
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Pass the activity as a listener to the adapter
-        taskAdapter = TaskAdapter(tasks, this, this)
+        taskAdapter = TaskAdapter(tasks, this, this, this)
         recyclerView.adapter = taskAdapter
 
         if (tasks.isEmpty()) {
@@ -158,6 +158,11 @@ class HomeScreen : AppCompatActivity(), TaskAdapter.OnDeleteClickListener, TaskA
             // Database update failed
             Toast.makeText(this, "Failed to update priority", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onTaskClick(taskId: Int) {
+        // Show a Toast message with the task ID
+        Toast.makeText(this, "Task ID: $taskId", Toast.LENGTH_SHORT).show()
     }
 
     private fun filterTasks(query: String) {

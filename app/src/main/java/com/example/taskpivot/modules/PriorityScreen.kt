@@ -15,7 +15,7 @@ import com.example.taskpivot.adapter.TaskAdapter
 import com.example.taskpivot.databinding.ActivityPriorityScreenBinding
 import com.example.taskpivot.popups.PriorityDeleteConformationModel
 
-class PriorityScreen : AppCompatActivity(), TaskAdapter.OnDeleteClickListener, TaskAdapter.OnPriorityClickListener {
+class PriorityScreen : AppCompatActivity(), TaskAdapter.OnDeleteClickListener, TaskAdapter.OnPriorityClickListener, TaskAdapter.OnTaskClickListener {
 
     private lateinit var binding: ActivityPriorityScreenBinding
     private lateinit var taskViewModel: TaskViewModel
@@ -78,7 +78,7 @@ class PriorityScreen : AppCompatActivity(), TaskAdapter.OnDeleteClickListener, T
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Pass the activity as a listener to the adapter
-        taskAdapter = TaskAdapter(priorityTasks, this, this)
+        taskAdapter = TaskAdapter(priorityTasks, this, this, this)
         recyclerView.adapter = taskAdapter
 
         // Set RecyclerView visibility
@@ -104,6 +104,11 @@ class PriorityScreen : AppCompatActivity(), TaskAdapter.OnDeleteClickListener, T
         // Get updated tasks from ViewModel or Repository
         val updatedTasks = taskViewModel.getAllTasks()
         updateUI(updatedTasks)
+    }
+
+    override fun onTaskClick(taskId: Int) {
+        // Show a Toast message with the task ID
+        Toast.makeText(this, "Task ID: $taskId", Toast.LENGTH_SHORT).show()
     }
 
     override fun onPriorityClick(taskId: Int, currentPriority: Boolean) {

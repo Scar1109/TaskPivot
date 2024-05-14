@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.taskpivot.R
 
-class TaskAdapter(private var tasks: List<Task>, private val listener: OnDeleteClickListener, private val priorityClickListener: OnPriorityClickListener) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter(private var tasks: List<Task>, private val listener: OnDeleteClickListener, private val priorityClickListener: OnPriorityClickListener, private val taskClickListener: OnTaskClickListener) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     // Define an interface for click listener
     interface OnDeleteClickListener {
@@ -19,6 +19,11 @@ class TaskAdapter(private var tasks: List<Task>, private val listener: OnDeleteC
     interface OnPriorityClickListener {
         fun onPriorityClick(taskId: Int, currentPriority: Boolean)
     }
+
+    interface OnTaskClickListener {
+        fun onTaskClick(taskId: Int)
+    }
+
 
     fun updateTasks(newTasks: List<Task>) {
         tasks = newTasks
@@ -33,21 +38,21 @@ class TaskAdapter(private var tasks: List<Task>, private val listener: OnDeleteC
         val deleteImageView: ImageView = itemView.findViewById(R.id.delete_button)
         val priorityImageView: ImageView = itemView.findViewById(R.id.priority_btn)
 
-
         init {
+            itemView.setOnClickListener(this)
             deleteImageView.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
-            if (v == deleteImageView) {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    val task = tasks[position]
-                    listener.onDeleteClick(task.id) // Pass the task ID to the listener
-                }
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                val task = tasks[position]
+                // Call the interface method with the task ID
+                taskClickListener.onTaskClick(task.id)
             }
         }
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.card_task_item, parent, false)
